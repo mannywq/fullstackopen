@@ -1,0 +1,26 @@
+title Notes app flow
+
+
+note over browser:
+user fills out form
+user submits form
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server->browser: HTML code
+browser->server: HTTP GET /exampleapp/main.css
+server->browser: main.css
+browser->server: HTTP GET /exampleapp/main.js
+server->browser: main.js
+note over browser:
+script opens http request to server to load data
+end note
+browser->server: HTTP GET /exampleapp/data.json
+server->browser: data.json
+note over browser
+browser document updated with json data as html
+end note
+browser->server: HTTP GET https://studies.cs.helsinki.fi/favicon.ico
+
+

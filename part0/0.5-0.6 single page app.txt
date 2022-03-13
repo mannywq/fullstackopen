@@ -1,0 +1,21 @@
+title single page app
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server->browser: HTML code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server->browser: spa.js
+note over browser:
+javascript triggers http request for data
+end note
+browser->server: HTTP GET exampleapp/data.json (xhr)
+server->browser: data.json
+note over browser:
+user submits form
+javascript prevents page reload
+end note
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+note over browser:
+javascript re-renders page with new form data
+end note
