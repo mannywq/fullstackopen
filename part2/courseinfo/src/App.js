@@ -1,16 +1,16 @@
-import Course from './components/Course'
-import Content from './components/Content'
-
+import Courses from './components/Courses'
 //const Header = ({name}) => <h1>{name}</h1>
 
 //const Total = ({ sum }) => <p>Number of exercises {sum}</p>
 
 
 
-const App = ({course}) =>
+const App = ({courses}) => (
 
       <div>
-        <Course courses={course} />
+        <h1>Web dev courses</h1>
+        <Courses courses={courses} />
       </div>
+)
 
 export default App
