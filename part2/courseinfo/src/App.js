@@ -11,7 +11,6 @@ const App = ({course}) =>
 
       <div>
         <Course courses={course} />
-        <Content parts={course.parts} />
       </div>
 
 export default App
