@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import _ from 'lodash'
+import axios from 'axios'
 import Filter from './components/Filter'
 import Content from "./components/Content"
 import AddPerson from "./components/AddPerson"
@@ -14,24 +15,22 @@ const App = () => {
   const [searching, setSearching] = useState(false)
  
 
-  const [persons, setPersons] = useState([
-      { name: 'Arto Hellas', 
-        phone: '07045018543', 
-        id: 1
-     }, 
-      { name: 'Ada Lovelace', 
-        phone: '39-44-5323523', 
-        id: 2 
-      },
-      { name: 'Dan Abramov', 
-        phone: '12-43-234345', 
-        id: 3 
-      },
-      { name: 'Mary Poppendieck', 
-        phone: '39-23-6423122', 
-        id: 4 
-      }
-    ]) 
+  const [persons, setPersons] = useState([])
+    
+  const hook = () => {
+    console.log('effect')
+    axios
+    .get('http://localhost:3001/persons')
+    .then(response => {
+      console.log('promise fulfilled')
+      console.log(response.headers)
+      setPersons(response.data)
+      console.log(persons)
+    })
+  }
+  useEffect(hook, [])
+  console.log(persons)
+
 
   const formSubmit = () => {
 
