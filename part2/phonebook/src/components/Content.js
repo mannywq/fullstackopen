@@ -1,12 +1,10 @@
 const Content = ({state, term, list}) => {
 
+  console.log(list)
   const persons = list
   let searching = state
   let searchTerm = term
 
-  console.log(searchTerm)
-  console.log(searching)
-  console.log (persons)
 
     if(searching === true) {
 
@@ -31,8 +29,9 @@ const Content = ({state, term, list}) => {
 
     const output = persons.map(p => <li>{ p.name } {p.phone}</li>)
 
-    return(output)
+    return output
 
     }
+    
   }
   export default Content

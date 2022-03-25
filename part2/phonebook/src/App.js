@@ -1,36 +1,34 @@
 import { useEffect, useState } from "react"
 import _ from 'lodash'
-import axios from 'axios'
 import Filter from './components/Filter'
 import Content from "./components/Content"
 import AddPerson from "./components/AddPerson"
+import personService from "./services/personService"
 
 
 
 const App = () => {
 
+
   const [values, setValues] = useState({})
   const [errors, setErrors] = useState({})
   const [searchTerm, setSearchTerm] = useState('')
   const [searching, setSearching] = useState(false)
+  const [isLoading, setLoading] = useState(true)
  
 
   const [persons, setPersons] = useState([])
     
-  const hook = () => {
-    console.log('effect')
-    axios
-    .get('http://localhost:3001/persons')
-    .then(response => {
-      console.log('promise fulfilled')
-      console.log(response.headers)
-      setPersons(response.data)
-      console.log(persons)
-    })
-  }
-  useEffect(hook, [])
-  console.log(persons)
+  
+  useEffect( () => {
+    
+    personService.getAll().then(personData => {
 
+      setPersons(personData)
+      setLoading(false)
+    })    
+  },[persons])
+  
 
   const formSubmit = () => {
 
@@ -62,10 +60,15 @@ const App = () => {
 
       }   
       newPerson.id = persons.length +1
-      setPersons(persons.concat(newPerson))
-      setValues({})
-      console.log(persons)
-      }
+        
+      personService.create(newPerson)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+        setValues({})
+      })  
+              
+      
+    }
     
   }
 
@@ -139,7 +142,14 @@ const validate= (event, name, value) => {
   
   
 
+if (isLoading === true) {
 
+return (
+<p>Loading data...</p>
+)
+}
+
+if (isLoading !== true)
   return (
     <div>
       <h2>Phonebook</h2>
