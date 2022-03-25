@@ -24,10 +24,10 @@ const App = () => {
     
     personService.getAll().then(personData => {
 
-      setPersons(personData)
+      setPersons(persons.concat(personData))
       setLoading(false)
     })    
-  },[persons])
+  },[])
   
 
   const formSubmit = () => {
@@ -63,7 +63,7 @@ const App = () => {
         
       personService.create(newPerson)
       .then(response => {
-        setPersons(persons.concat(response.data))
+        setPersons(persons.concat(response))
         setValues({})
       })  
               
