@@ -1,4 +1,6 @@
-const Content = ({state, term, list}) => {
+import personService from "../services/personService"
+
+const Content = ({state, term, list, remover}) => {
 
   console.log(list)
   const persons = list
@@ -27,7 +29,7 @@ const Content = ({state, term, list}) => {
     }
     else {
 
-    const output = persons.map(p => <li>{ p.name } {p.phone}</li>)
+    const output = (persons.length > 0) ? persons.map(p => <li>{ p.name } {p.phone}<button id={p.id} name={p.name} onClick={remover}>Delete</button></li>) : <p>No people to show</p>
 
     return output
 

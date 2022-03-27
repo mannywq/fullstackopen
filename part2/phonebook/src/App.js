@@ -28,7 +28,27 @@ const App = () => {
       setLoading(false)
     })    
   },[])
-  
+
+  const handleDelete = (event) => {
+
+    const id=event.target.id
+    const name=event.target.name
+
+    if (window.confirm(`Are you sure you want to delete ${name}`)) {
+
+    personService.remove(id)
+
+    personService.getAll().then(personData => {
+
+      setPersons(personData)
+      setLoading(false)
+    })    
+  }
+
+
+
+
+      }
 
   const formSubmit = () => {
 
@@ -160,7 +180,7 @@ if (isLoading !== true)
       
       <h2>Numbers</h2>
       <ul>
-       <Content state={searching} term={searchTerm} list={persons}/>
+       <Content state={searching} term={searchTerm} list={persons} remover={handleDelete}/>
       
       </ul>
      
