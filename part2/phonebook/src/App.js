@@ -4,6 +4,7 @@ import Filter from './components/Filter'
 import Content from "./components/Content"
 import AddPerson from "./components/AddPerson"
 import personService from "./services/personService"
+import Notification from "./components/Notification"
 
 
 
@@ -15,6 +16,7 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [searching, setSearching] = useState(false)
   const [isLoading, setLoading] = useState(true)
+  const [notification, setNotification] = useState('Testing something here')
  
 
   const [persons, setPersons] = useState([])
@@ -44,11 +46,7 @@ const App = () => {
       setLoading(false)
     })    
   }
-
-
-
-
-      }
+}
 
   const formSubmit = () => {
 
@@ -85,6 +83,8 @@ const App = () => {
       .then(response => {
         setPersons(persons.concat(response))
         setValues({})
+        setNotification(`${newPerson.name} was added`)
+        setTimeout(() => { setNotification(null)}, 5000)
       })  
               
       
@@ -173,6 +173,8 @@ if (isLoading !== true)
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification}/>
+
       <Filter props={handleSearch}/>
 
       <h2>Add new</h2>
