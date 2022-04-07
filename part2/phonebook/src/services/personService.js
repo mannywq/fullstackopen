@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const db = '/api/persons'
+const db = 'api/persons'
 
 const getAll = () => {
 
