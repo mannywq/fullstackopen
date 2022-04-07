@@ -16,7 +16,7 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [searching, setSearching] = useState(false)
   const [isLoading, setLoading] = useState(true)
-  const [notification, setNotification] = useState('Testing something here')
+  const [notification, setNotification] = useState(null)
  
 
   const [persons, setPersons] = useState([])
