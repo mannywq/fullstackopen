@@ -1,10 +1,10 @@
 const AddPerson = ({onChange, onSubmit}) => {
 
     return (
-    <form onSubmit={onSubmit}>
+    <form id="addPerson" onSubmit={onSubmit}>
         <div>
-          name: <input name="user" defaultValue='' onChange={onChange} /><br/>
-          phone: <input name="phone" defaultValue='' onChange={onChange} />
+          <label>Name:</label> <input name="user" defaultValue='' onChange={onChange} /><br/>
+          <label>Phone:</label> <input name="phone" defaultValue='' onChange={onChange} />
         </div>
         <div>
           <button type="submit">add</button>

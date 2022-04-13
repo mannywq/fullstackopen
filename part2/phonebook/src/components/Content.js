@@ -1,39 +1,55 @@
 import personService from "../services/personService"
+import EditableField from "./Editablefield"
 
-const Content = ({state, term, list, remover}) => {
+import {useState, useEffect} from 'react'
 
-  console.log(list)
+const Content = ({state, term, list, setter, remover}) => {
+
+  //console.log(list)
   const persons = list
-  let searching = state
-  let searchTerm = term
+  const setPersons = setter
+  const searching = state
+  const searchTerm = term
 
 
-    if(searching === true) {
+  const updateData = (id, obj) => {
 
-      const filtered = persons.filter(person => {
+    personService.update(id, obj)
+    personService.getAll().then(result => {
 
-        return(
+      setPersons(result)
 
-          person.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          person.phone.includes(searchTerm)
-        )
+    })
+
+  }
+
+  if(searching === true) {
+
+    const filtered = persons.filter(person => (
 
 
-      })
-        
-      const content = filtered.map(f => <li>{f.name} {f.phone}</li>)
+        person.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+)
 
-      return(content)
+    console.log(filtered)
+      
+    const content = filtered.map(f => (<li><EditableField name="name" value={f.name} id={f._id} updater={updateData}/><EditableField name="phone" value={f.phone} id={f._id} updater={updateData}/><button id={f._id} name={f.name} onClick={remover}>Delete</button></li>))
 
- 
-    }
-    else {
+    return(content)
 
-    const output = (persons.length > 0) ? persons.map(p => <li>{ p.name } {p.phone}<button id={p.id} name={p.name} onClick={remover}>Delete</button></li>) : <p>No people to show</p>
 
-    return output
+  }
+  else {
 
-    }
+  const output = (persons.length > 0) ? persons.map(p => <li><EditableField name="name" value={p.name} id={p._id} updater={updateData}/><EditableField name="phone" value={p.phone} id={p._id} updater={updateData}/> <button id={p.id} name={p.name} onClick={remover}>Delete</button></li>) : <p>No people to show</p>
+
+  return output
+
+  }
+
+     
+
     
   }
   export default Content

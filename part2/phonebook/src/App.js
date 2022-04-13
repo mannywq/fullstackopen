@@ -77,7 +77,7 @@ const App = () => {
         return;
 
       }   
-      newPerson.id = persons.length +1
+      //newPerson.id = persons.length +1
         
       personService.create(newPerson)
       .then(response => {
@@ -182,7 +182,7 @@ if (isLoading !== true)
       
       <h2>Numbers</h2>
       <ul>
-       <Content state={searching} term={searchTerm} list={persons} remover={handleDelete}/>
+       <Content state={searching} term={searchTerm} list={persons} setter={setPersons} remover={handleDelete}/>
       
       </ul>
      
