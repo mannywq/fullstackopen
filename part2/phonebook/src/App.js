@@ -18,15 +18,18 @@ const App = () => {
   const [isLoading, setLoading] = useState(true)
   const [notification, setNotification] = useState(null)
  
+ 
 
   const [persons, setPersons] = useState([])
+  const [resultList, setResultList] = useState([])
     
   
   useEffect( () => {
     
     personService.getAll().then(personData => {
 
-      setPersons(persons.concat(personData))
+      setPersons(personData)
+      setResultList(persons)
       setLoading(false)
     })    
   },[])
@@ -48,11 +51,6 @@ const App = () => {
   }
 }
 
-  const formSubmit = () => {
-
-    console.log("Callback function when form is submitted!");
-    console.log("Form Values ", values);
-  }
 
   const handleSubmit = (event) => {
 
@@ -92,20 +90,6 @@ const App = () => {
     
   }
 
-
-  const handleSearch= (event) => {
-
-    event.persist()
-
-    let name= event.target.name
-    let value = event.target.value
-
-    setSearchTerm(value)
-    setSearching(true)
-
-    console.log('Searching for: ', value)
-    
-}
 
 
 
@@ -175,14 +159,14 @@ if (isLoading !== true)
       <h2>Phonebook</h2>
       <Notification message={notification}/>
 
-      <Filter props={handleSearch}/>
+      <Filter setter1={setSearching} setter2={setSearchTerm} keyword={searchTerm} data={persons} resultList={resultList} setResultList={setResultList}/>
 
       <h2>Add new</h2>
       <AddPerson onChange={handleChange} onSubmit={handleSubmit}/>
       
       <h2>Numbers</h2>
       <ul>
-       <Content state={searching} term={searchTerm} list={persons} setter={setPersons} remover={handleDelete}/>
+       <Content state={searching} data={persons} resultList={resultList} setter={setPersons} remover={handleDelete}/>
       
       </ul>
      
