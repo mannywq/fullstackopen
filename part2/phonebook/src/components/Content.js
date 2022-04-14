@@ -25,7 +25,7 @@ const Content = ({state, data, resultList, setter, remover}) => {
 
     const content = resultList.map((f) => (
     
-    <li>
+    <li key={f._id}>
       <EditableField name="name" value={f.name} id={f._id} updater={updateData}/>
       <EditableField name="phone" value={f.phone} id={f._id} updater={updateData}/>
       <button id={f._id} name={f.name} onClick={remover}>Delete</button>
@@ -39,7 +39,7 @@ const Content = ({state, data, resultList, setter, remover}) => {
 
   return (data.length > 0 ? data.map((p) => (
   
-  <li>
+  <li key={p._id}>
     <EditableField name="name" value={p.name} id={p._id} updater={updateData}/>
     <EditableField name="phone" value={p.phone} id={p._id} updater={updateData}/> 
     <button id={p.id} name={p.name} onClick={remover}>Delete</button>

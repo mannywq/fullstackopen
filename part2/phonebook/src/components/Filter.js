@@ -9,7 +9,9 @@ const Filter = ({setter1, setter2, keyword, data, resultList, setResultList}) =>
         const res = data.filter(person => (
         
             person.name.toLowerCase().includes(keyword.toLowerCase())
+            
         ))
+        debugger;
 
         setResultList(res)
 
