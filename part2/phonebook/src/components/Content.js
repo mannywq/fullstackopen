@@ -25,10 +25,10 @@ const Content = ({state, data, resultList, setter, remover}) => {
 
     const content = resultList.map((f) => (
     
-    <li key={f._id}>
-      <EditableField name="name" value={f.name} id={f._id} updater={updateData}/>
-      <EditableField name="phone" value={f.phone} id={f._id} updater={updateData}/>
-      <button id={f._id} name={f.name} onClick={remover}>Delete</button>
+    <li key={f.id}>
+      <EditableField name="name" value={f.name} id={f.id} updater={updateData}/>
+      <EditableField name="phone" value={f.phone} id={f.id} updater={updateData}/>
+      <button id={f.id} name={f.name} onClick={remover}>Delete</button>
       </li>))
 
     return(content)
@@ -39,9 +39,9 @@ const Content = ({state, data, resultList, setter, remover}) => {
 
   return (data.length > 0 ? data.map((p) => (
   
-  <li key={p._id}>
-    <EditableField name="name" value={p.name} id={p._id} updater={updateData}/>
-    <EditableField name="phone" value={p.phone} id={p._id} updater={updateData}/> 
+  <li key={p.id}>
+    <EditableField name="name" value={p.name} id={p.id} updater={updateData}/>
+    <EditableField name="phone" value={p.phone} id={p.id} updater={updateData}/> 
     <button id={p.id} name={p.name} onClick={remover}>Delete</button>
     </li>)) : <p>No people to show</p>)
 

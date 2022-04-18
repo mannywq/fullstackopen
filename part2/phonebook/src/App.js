@@ -70,13 +70,12 @@ const App = () => {
 
       if (obj) {
 
-        alert(`${obj.name} already exists`)
-        console.log(obj.name)
+       personService.update(obj.id, {phone: newPerson.phone})
+        console.log(obj)
         return;
 
       }   
-      //newPerson.id = persons.length +1
-        
+      else {  
       personService.create(newPerson)
       .then(response => {
         setPersons(persons.concat(response))
@@ -84,6 +83,7 @@ const App = () => {
         setNotification(`${newPerson.name} was added`)
         setTimeout(() => { setNotification(null)}, 5000)
       })  
+    }
               
       
     }
