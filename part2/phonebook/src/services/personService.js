@@ -13,6 +13,10 @@ const create = newObject => {
 
     const request = axios.post(db, newObject)
     return request.then(response => response.data)
+    .catch(error => {
+
+        setNotification(error)
+    })
 
 }
 

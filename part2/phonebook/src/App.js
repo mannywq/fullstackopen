@@ -65,26 +65,20 @@ const App = () => {
             alert(Object.values(errors))
             return;
         }
-
-     const obj = persons.find(n => n.name === newPerson.name)
-
-      if (obj) {
-
-       personService.update(obj.id, {phone: newPerson.phone})
-        console.log(obj)
-        return;
-
-      }   
-      else {  
+    
       personService.create(newPerson)
       .then(response => {
         setPersons(persons.concat(response))
         setValues({})
         setNotification(`${newPerson.name} was added`)
         setTimeout(() => { setNotification(null)}, 5000)
-      })  
-    }
-              
+      })
+      .catch(error => {
+
+        setNotification(error.message)
+        setTimeout(() => setNotification(null), 5000)
+      })
+             
       
     }
     
@@ -103,13 +97,13 @@ const App = () => {
 
     setSearching(false)
 
-    validate(event, name, value)
+    //validate(event, name, value)
 
     setValues({...values, [name]: value,})
 
   }
 
-const validate= (event, name, value) => {
+/*const validate= (event, name, value) => {
 
     switch (name) {
 
@@ -142,7 +136,7 @@ const validate= (event, name, value) => {
 
       default: break;
     }
-  }
+  }*/
   
   
 
